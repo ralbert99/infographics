@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
+		<title>Sleep Tracking</title>
+
+		<!-- Google fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+		<!-- D3.js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
+		<style>
+			body {
+				font-family: 'Open Sans', sans-serif;
+				font-size: 11px;
+				font-weight: 300;
+				fill: #242424;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+				cursor: default;
+			}
+
+      body h1 {
+        font-size: 24px;
+        margin-top: 40px;
+        color: #666;
+      }
+
+      body ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        margin-right: 50px;
+      }
+
+      body li {
+        float: right;
+        text-align: center;
+        font-weight: bold;
+        display: block;
+        color: white;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+
+
+			.legend {
+				font-family: 'Raleway', sans-serif;
+				fill: #333333;
+			}
+
+			.tooltip {
+				fill: #333333;
+			}
+		</style>
+
+	</head>
+	<body>
+
+    <h1>Sleep Tracking</h1>
+
+		<div class="radarChart"></div>
+
+		<script src="radarChart.js"></script>
+		<script>
+
+      /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+
+			//////////////////////////////////////////////////////////////
+			//////////////////////// Set-Up //////////////////////////////
+			//////////////////////////////////////////////////////////////
+			var margin = {top: 100, right: 100, bottom: 100, left: 100},
+				width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+			//////////////////////////////////////////////////////////////
+			////////////////////////// Data //////////////////////////////
+			//////////////////////////////////////////////////////////////
+			var data = [
+					  [//Total
+						{axis:"Monday",value:6.5},
+						{axis:"Tuesday",value:7.5},
+						{axis:"Wednesday",value:7.8},
+						{axis:"Thursday",value:6.2},
+						{axis:"Friday",value:7.0},
+						{axis:"Saturday",value:5.5},
+						{axis:"Sunday",value:7.8},
+          ],[//Light
+						{axis:"Monday",value:4.15},
+						{axis:"Tuesday",value:4.0},
+						{axis:"Wednesday",value:4.3},
+						{axis:"Thursday",value:3.8},
+						{axis:"Friday",value:4.2},
+						{axis:"Saturday",value:3.4},
+						{axis:"Sunday",value:5.2},
+          ],[//REM
+						{axis:"Monday",value:1.23},
+						{axis:"Tuesday",value:1.9},
+						{axis:"Wednesday",value:2.1},
+						{axis:"Thursday",value:1.2},
+						{axis:"Friday",value:1.8},
+						{axis:"Saturday",value:1.1},
+						{axis:"Sunday",value:1.45},
+          ],[//Deep
+						{axis:"Monday",value:1.1},
+						{axis:"Tuesday",value:1.5},
+						{axis:"Wednesday",value:1.5},
+						{axis:"Thursday",value:1.15},
+						{axis:"Friday",value:1.1},
+						{axis:"Saturday",value:1.1},
+						{axis:"Sunday",value:1.2},
+					],[//Awake
+						{axis:"Monday",value:1.05},
+						{axis:"Tuesday",value:.8},
+						{axis:"Wednesday",value:1.2},
+						{axis:"Thursday",value:1.0},
+						{axis:"Friday",value:1.0},
+						{axis:"Saturday",value:1.0},
+						{axis:"Sunday",value:1.1},
+          ]
+					];
+			//////////////////////////////////////////////////////////////
+			//////////////////// Draw the Chart //////////////////////////
+			//////////////////////////////////////////////////////////////
+			var color = d3.scale.ordinal()
+				.range(["#2F9395","#F7D969","#F16A43","#EC1C4B","#A6206A"]);
+
+			var radarChartOptions = {
+			  w: width,
+			  h: height,
+			  margin: margin,
+			  maxValue: 8,
+			  levels: 10,
+			  roundStrokes: true,
+			  color: color
+			};
+			//Call function to draw the Radar chart
+			RadarChart(".radarChart", data, radarChartOptions);
+		</script>
+
+    <ul>
+      <li style="color: #2F9395">Total Hours</li>
+      <li style="color: #F7D969">Light Sleep</li>
+      <li style="color: #F16A43">REM</li>
+      <li style="color: #EC1C4B">Deep Sleep</li>
+      <li style="color: #A6206A">Awake</li>
+    </ul>
+
+	</body>
+</html>
